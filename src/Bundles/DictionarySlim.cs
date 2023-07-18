@@ -28,9 +28,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if !NETSTANDARD
 using System.Diagnostics.CodeAnalysis;
-#endif
 using System.Runtime.CompilerServices;
 
 namespace Bundles;
@@ -51,9 +49,7 @@ namespace Bundles;
 /// </remarks>
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(DictionarySlimDebugView<,>))]
-#if !NETSTANDARD
 [SkipLocalsInit]
-#endif
 public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
     where TKey : IEquatable<TKey>
 {
@@ -161,14 +157,8 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         TKey key
     )
     {
-#if !NETSTANDARD
         ArgumentNullException.ThrowIfNull(key);
-#else
-        if (key is null)
-        {
-            throw new ArgumentNullException("The supplied key was null.");
-        }
-#endif
+
         DictionaryEntry[] entries = this.entries;
         int collisions = 0;
 
@@ -205,20 +195,11 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
     (
         TKey key,
 
-#if !NETSTANDARD
         [MaybeNullWhen(false)]
-#endif
         out TValue value
     )
     {
-#if !NETSTANDARD
         ArgumentNullException.ThrowIfNull(key);
-#else
-        if (key is null)
-        {
-            throw new ArgumentNullException("The supplied key was null.");
-        }
-#endif
 
         DictionaryEntry[] entries = this.entries;
         int collisions = 0;
@@ -252,14 +233,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
     {
         get
         {
-#if !NETSTANDARD
             ArgumentNullException.ThrowIfNull(key);
-#else
-            if (key is null)
-            {
-                throw new ArgumentNullException("The supplied key was null.");
-            }
-#endif
 
             DictionaryEntry[] entries = this.entries;
             int collisions = 0;
@@ -306,14 +280,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         TKey key
     )
     {
-#if !NETSTANDARD
         ArgumentNullException.ThrowIfNull(key);
-#else
-        if (key is null)
-        {
-            throw new ArgumentNullException("The supplied key was null.");
-        }
-#endif
 
         DictionaryEntry[] entries = this.entries;
         int bucketIndex = key.GetHashCode() & (buckets.Length - 1);
@@ -375,14 +342,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
     /// <returns>A reference to the new or existing value.</returns>
     public ref TValue GetOrAddValueRef(TKey key)
     {
-#if !NETSTANDARD
         ArgumentNullException.ThrowIfNull(key);
-#else
-        if (key is null)
-        {
-            throw new ArgumentNullException("The supplied key was null.");
-        }
-#endif
 
         DictionaryEntry[] entries = this.entries;
 

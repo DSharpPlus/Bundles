@@ -4,9 +4,7 @@
 
 using System;
 using System.Diagnostics;
-#if !NETSTANDARD
 using System.Diagnostics.CodeAnalysis;
-#endif
 
 namespace Bundles;
 
@@ -15,27 +13,21 @@ namespace Bundles;
 /// </summary>
 internal static class ThrowHelper
 {
-    [DebuggerHidden]
-#if !NETSTANDARD
     [DoesNotReturn]
+    [DebuggerHidden]
     [StackTraceHidden]
-#endif
     internal static void ThrowConcurrentOperationsNotSupported() 
         => throw new InvalidOperationException("Concurrent modifications to this collection type are not supported.");
 
-    [DebuggerHidden]
-#if !NETSTANDARD
     [DoesNotReturn]
+    [DebuggerHidden]
     [StackTraceHidden]
-#endif
     internal static void ThrowCapacityIntMaxValueExceeded()
         => throw new InvalidOperationException($"This type's maximum capacity of {int.MaxValue} was exceeded.");
 
-    [DebuggerHidden]
-#if !NETSTANDARD
     [DoesNotReturn]
+    [DebuggerHidden]
     [StackTraceHidden]
-#endif
     internal static void ThrowValueNotFound()
         => throw new ArgumentException("There was no value corresponding to the given key.");
 }
