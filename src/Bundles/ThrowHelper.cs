@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 #endif
 
-namespace DSharpPlus.Collections;
+namespace Bundles;
 
 /// <summary>
 /// Contains utilities for throwing exceptions out of hot code paths.

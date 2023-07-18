@@ -10,9 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using DSharpPlus.Collections;
-
-namespace DSharpPlus.Converters;
+namespace Bundles.Converters;
 
 [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
 [RequiresDynamicCode("JSON serialization and deserialization might need runtime code generation. Use the source generator instead.")]

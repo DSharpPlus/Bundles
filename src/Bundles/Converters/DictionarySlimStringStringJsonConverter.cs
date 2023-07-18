@@ -9,9 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using DSharpPlus.Collections;
-
-namespace DSharpPlus.Converters;
+namespace Bundles.Converters;
 
 /// <summary>
 /// Represents a specialized converter for string-to-string slim dictionaries. This converter is AOT-friendly.

@@ -8,9 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using DSharpPlus.Collections;
-
-namespace DSharpPlus.Converters;
+namespace Bundles.Converters;
 
 /// <summary>
 /// Provides JSON conversion logic for <see cref="DictionarySlim{TKey, TValue}"/> with <see cref="IParsable{TSelf}"/>

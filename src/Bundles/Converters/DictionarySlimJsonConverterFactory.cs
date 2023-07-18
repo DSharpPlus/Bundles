@@ -10,9 +10,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using DSharpPlus.Collections;
-
-namespace DSharpPlus.Converters;
+namespace Bundles.Converters;
 
 /// <summary>
 /// Provides JSON serialization with the appropriate converters for slim dictionaries.

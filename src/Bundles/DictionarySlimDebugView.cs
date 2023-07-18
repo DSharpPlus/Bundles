@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace DSharpPlus.Collections;
+namespace Bundles;
 
 /// <summary>
 /// The debugger view for <seealso cref="DictionarySlim{TKey, TValue}"/>

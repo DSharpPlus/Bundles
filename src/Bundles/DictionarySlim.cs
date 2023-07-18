@@ -33,7 +33,7 @@ using System.Diagnostics.CodeAnalysis;
 #endif
 using System.Runtime.CompilerServices;
 
-namespace DSharpPlus.Collections;
+namespace Bundles;
 
 /// <summary>
 /// A lightweight dictionary with three principal differences compared to <see cref="Dictionary{TKey, TValue}"/>.
