@@ -260,14 +260,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
 
             ThrowHelper.ThrowValueNotFound();
 
-            // this is unreachable, but roslyn disagrees; so we need to have a dummy return
-            // thanks to netstandard being netstandard, this can't become Unsafe.NullRef<TValue>();
-            unsafe
-            {
-#pragma warning disable CS8500
-                return ref *(TValue*)null;
-#pragma warning restore CS8500
-            }
+            return ref Unsafe.NullRef<TValue>();
         }
     }
 
