@@ -5,12 +5,11 @@
 using System;
 using System.Text.Json;
 
-using DSharpPlus.Collections;
-using DSharpPlus.Converters;
+using Bundles.Converters;
 
 using Xunit;
 
-namespace DSharpPlus.Shared.Tests.Converters;
+namespace Bundles.Tests.Serialization;
 
 /// <summary>
 /// Contains generic tests for <see cref="DictionarySlim{TKey, TValue}"/> de/serialization.

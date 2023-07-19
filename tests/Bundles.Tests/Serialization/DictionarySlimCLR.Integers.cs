@@ -4,12 +4,11 @@
 
 using System.Text.Json;
 
-using DSharpPlus.Collections;
-using DSharpPlus.Converters;
+using Bundles.Converters;
 
 using Xunit;
 
-namespace DSharpPlus.Shared.Tests.Converters;
+namespace Bundles.Tests.Serialization;
 
 // here we deal with whether integer keys, positive and negative, are handled correctly
 public partial class DictionarySlimCLR

@@ -56,7 +56,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
     // using this static initialization allows us to initialize further dictionaries without
     // any initial allocations. instead, we allocate once per monomorphized generic instantiation,
     // plus one time for the canonicalized reference type generic instantiation
-    // DSharpPlus.Collections.DictionarySlim<System.__Canon, System.__Canon>.
+    // Bundles.DictionarySlim<System.__Canon, System.__Canon>.
     // The first addition will cause a resize, replacing this with a real array.
     private static readonly DictionaryEntry[] initialEntries = new DictionaryEntry[1];
 

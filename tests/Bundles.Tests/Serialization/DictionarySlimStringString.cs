@@ -4,12 +4,11 @@
 
 using System.Text.Json;
 
-using DSharpPlus.Collections;
-using DSharpPlus.Converters;
+using Bundles.Converters;
 
 using Xunit;
 
-namespace DSharpPlus.Shared.Tests.Converters;
+namespace Bundles.Tests.Serialization;
 
 /// <summary>
 /// Tests <seealso cref="DictionarySlim{TKey, TValue}"/> serialization for string, string.
