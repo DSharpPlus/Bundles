@@ -1,0 +1,44 @@
+name: Publish Release
+
+on:
+  release:
+    types:
+      - "published"
+
+env:
+  DOTNET_NOLOGO: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
+
+jobs:
+  publish_release:
+    name: Publish Release
+    runs-on: "self-hosted"
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8
+      - name: Publish NuGet packages
+        run: |
+          mkdir build
+          dotnet pack -c Release -o build
+          dotnet nuget push "build/*" -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
+      - name: Upload NuGet packages to GitHub Actions
+        uses: actions/upload-artifact@v3
+        with:
+          name: Bundles Release ${{ github.event.release.name }} NuGet Packages.zip
+          path: build/*
+      - name: Upload NuGet Packages To Github Release
+        uses: "ncipollo/release-action@v1"
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: "build/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          omitNameDuringUpdate: true # We don't want to update the name of the release.
+          omitBodyDuringUpdate: true # We don't want to update the body of the release.
