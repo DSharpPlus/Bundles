@@ -25,6 +25,7 @@
 // SOFTWARE.
 
 using System;
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -50,7 +51,7 @@ namespace Bundles;
 [DebuggerDisplay("Count = {Count}")]
 [DebuggerTypeProxy(typeof(DictionarySlimDebugView<,>))]
 [SkipLocalsInit]
-public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IDisposable
     where TKey : IEquatable<TKey>
 {
     // using this static initialization allows us to initialize further dictionaries without
@@ -68,6 +69,8 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
     // one-based index into entries, 0 means empty.
     private int[] buckets;
     private DictionaryEntry[] entries;
+
+    private bool disposed;
 
     /// <inheritdoc/>
     public int Count { get; private set; }
@@ -146,7 +149,18 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         this.Count = 0;
         this.freeList = -1;
         this.buckets = sizeOneIntArray;
+        ArrayPool<DictionaryEntry>.Shared.Return(this.entries);
         this.entries = initialEntries;
+    }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        if (!this.disposed)
+        {
+            this.Clear();
+            this.disposed = true;
+        }
     }
 
     /// <summary>
@@ -324,7 +338,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         return false;
     }
 
-    // Not safe for concurrent _reads_ (at least, if either of them add)
+    // Not safe for concurrent *reads* (at least, if either of them add)
     // For concurrent reads, prefer TryGetValue(key, out value)
     /// <summary>
     /// Gets the value for the specified key, or, if the key is not present,
@@ -410,15 +424,17 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
 
         // for net8.0 targets we could consider implementing this for different resize strategies
         // a linearly increasing slim dictionary would be useful.
-        int newSize = this.entries.Length * 2;
+        int newSize = checked(this.entries.Length * 2);
 
-        if ((uint)newSize > int.MaxValue)
-        {
-            ThrowHelper.ThrowCapacityIntMaxValueExceeded();
-        }
+        // retrieve the next larger array from the shared pool, allocating if need be
+        DictionaryEntry[] entries = ArrayPool<DictionaryEntry>.Shared.Rent(newSize);
 
-        DictionaryEntry[] entries = new DictionaryEntry[newSize];
         Array.Copy(this.entries, 0, entries, 0, count);
+
+        // return the current array allocated in the last resize, for use for the next DictionarySlim
+        // growing to this size. since all resizes are currently powers of two, this will always catch
+        // the next DictionarySlim
+        ArrayPool<DictionaryEntry>.Shared.Return(this.entries);
 
         int[] newBuckets = new int[entries.Length];
 
