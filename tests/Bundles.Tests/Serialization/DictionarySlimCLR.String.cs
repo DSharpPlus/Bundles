@@ -43,7 +43,7 @@ public partial class DictionarySlimCLR
 
         DictionarySlim<string, ushort> dict = JsonSerializer.Deserialize<DictionarySlim<string, ushort>>
         (
-            serialized, 
+            serialized,
             options
         )!;
 

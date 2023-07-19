@@ -23,8 +23,8 @@ public class DictionarySlimIParsableTValueJsonConverter<TKey, TValue> : JsonConv
     /// <inheritdoc/>
     public override DictionarySlim<TKey, TValue>? Read
     (
-        ref Utf8JsonReader reader, 
-        Type typeToConvert, 
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -44,7 +44,7 @@ public class DictionarySlimIParsableTValueJsonConverter<TKey, TValue> : JsonConv
 
             string propertyNameRaw = reader.GetString()!;
 
-            if(!TKey.TryParse(propertyNameRaw, null, out TKey? propertyName))
+            if (!TKey.TryParse(propertyNameRaw, null, out TKey? propertyName))
             {
                 throw new ArgumentException($"The key {propertyNameRaw} could not be parsed as {typeof(TKey)}.");
             }
@@ -62,8 +62,8 @@ public class DictionarySlimIParsableTValueJsonConverter<TKey, TValue> : JsonConv
     /// <inheritdoc/>
     public override void Write
     (
-        Utf8JsonWriter writer, 
-        DictionarySlim<TKey, TValue> value, 
+        Utf8JsonWriter writer,
+        DictionarySlim<TKey, TValue> value,
         JsonSerializerOptions options
     )
     {

@@ -16,7 +16,7 @@ internal static class ThrowHelper
     [DoesNotReturn]
     [DebuggerHidden]
     [StackTraceHidden]
-    internal static void ThrowConcurrentOperationsNotSupported() 
+    internal static void ThrowConcurrentOperationsNotSupported()
         => throw new InvalidOperationException("Concurrent modifications to this collection type are not supported.");
 
     [DoesNotReturn]

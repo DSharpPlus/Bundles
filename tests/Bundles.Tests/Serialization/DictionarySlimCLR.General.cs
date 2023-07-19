@@ -24,10 +24,10 @@ public partial class DictionarySlimCLR
 
         ref string value = ref invalid.GetOrAddValueRef
         (
-            new() 
-            { 
-                First = 7, 
-                Second = 8 
+            new()
+            {
+                First = 7,
+                Second = 8
             }
         );
 
@@ -136,6 +136,6 @@ readonly file struct ComplexType : IEquatable<ComplexType>
     public int First { get; init; }
     public int Second { get; init; }
 
-    public bool Equals(ComplexType other) 
+    public bool Equals(ComplexType other)
         => this.First == other.First && this.Second == other.Second;
 }

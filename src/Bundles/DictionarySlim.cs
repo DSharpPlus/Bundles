@@ -164,8 +164,8 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
 
         for
         (
-            int i = buckets[key.GetHashCode() & (buckets.Length - 1)] - 1; 
-            (uint)i < (uint)entries.Length; 
+            int i = buckets[key.GetHashCode() & (buckets.Length - 1)] - 1;
+            (uint)i < (uint)entries.Length;
             i = entries[i].next
         )
         {
@@ -174,7 +174,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
                 return true;
             }
 
-            if(collisions == entries.Length)
+            if (collisions == entries.Length)
             {
                 ThrowHelper.ThrowConcurrentOperationsNotSupported();
             }
@@ -288,12 +288,12 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
             if (candidate.key.Equals(key))
             {
                 if (lastIndex != -1)
-                {   
+                {
                     // fix the preceding element in the chain to point to the correct next element, if any
                     entries[lastIndex].next = candidate.next;
                 }
                 else
-                {   
+                {
                     // fix the bucket to the new head, if any
                     buckets[bucketIndex] = candidate.next + 1;
                 }
@@ -342,10 +342,10 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         int collisions = 0;
         int bucketIndex = key.GetHashCode() & (this.buckets.Length - 1);
 
-        for 
+        for
         (
             int i = this.buckets[bucketIndex] - 1;
-            (uint)i < (uint)entries.Length; 
+            (uint)i < (uint)entries.Length;
             i = entries[i].next
         )
         {
@@ -435,10 +435,10 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         return entries;
     }
 
-    IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() 
+    IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
         => new Enumerator(this);
 
-    IEnumerator IEnumerable.GetEnumerator() 
+    IEnumerator IEnumerable.GetEnumerator()
         => new Enumerator(this);
 
     // avoid boxing enumerators if not necessary
@@ -452,7 +452,6 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         private readonly DictionarySlim<TKey, TValue> dictionary;
         private int index;
         private int count;
-        private KeyValuePair<TKey, TValue> current;
 
         internal Enumerator
         (
@@ -462,7 +461,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
             this.dictionary = dictionary;
             this.index = 0;
             this.count = dictionary.Count;
-            this.current = default;
+            this.Current = default;
         }
 
         /// <inheritdoc/>
@@ -470,7 +469,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         {
             if (this.count == 0)
             {
-                this.current = default;
+                this.Current = default;
                 return false;
             }
 
@@ -481,7 +480,7 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
                 this.index++;
             }
 
-            this.current = new KeyValuePair<TKey, TValue>
+            this.Current = new KeyValuePair<TKey, TValue>
             (
                 this.dictionary.entries[this.index].key,
                 this.dictionary.entries[this.index++].value
@@ -493,15 +492,15 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         /// <summary>
         /// Get current value
         /// </summary>
-        public readonly KeyValuePair<TKey, TValue> Current => this.current;
+        public KeyValuePair<TKey, TValue> Current { get; private set; }
 
-        readonly object IEnumerator.Current => this.current;
+        readonly object IEnumerator.Current => this.Current;
 
         void IEnumerator.Reset()
         {
             this.index = 0;
             this.count = this.dictionary.Count;
-            this.current = default;
+            this.Current = default;
         }
 
         /// <summary>

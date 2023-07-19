@@ -41,7 +41,7 @@ public class DictionarySlimJsonConverterFactory : JsonConverterFactory
     /// <inheritdoc/>
     public override JsonConverter? CreateConverter
     (
-        Type typeToConvert, 
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -61,12 +61,12 @@ public class DictionarySlimJsonConverterFactory : JsonConverterFactory
 
             return (JsonConverter?)Activator.CreateInstance(converter);
         }
-        else if 
+        else if
         (
             generics[0].GetInterfaces()
             .Any
             (
-                candidate => candidate.IsGenericType 
+                candidate => candidate.IsGenericType
                     && candidate.GetGenericTypeDefinition() == typeof(IParsable<>)
             )
         )
@@ -89,7 +89,7 @@ public class DictionarySlimJsonConverterFactory : JsonConverterFactory
     (
         Type type
     )
-    { 
+    {
         return type == typeof(string) || type.GetInterfaces()
         .Any
         (

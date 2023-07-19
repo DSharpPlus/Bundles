@@ -20,8 +20,8 @@ public class DictionarySlimStringTValueJsonConverter<TValue> : JsonConverter<Dic
     /// <inheritdoc/>
     public override DictionarySlim<string, TValue>? Read
     (
-        ref Utf8JsonReader reader, 
-        Type typeToConvert, 
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -54,8 +54,8 @@ public class DictionarySlimStringTValueJsonConverter<TValue> : JsonConverter<Dic
     /// <inheritdoc/>
     public override void Write
     (
-        Utf8JsonWriter writer, 
-        DictionarySlim<string, TValue> value, 
+        Utf8JsonWriter writer,
+        DictionarySlim<string, TValue> value,
         JsonSerializerOptions options
     )
     {
