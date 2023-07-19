@@ -18,7 +18,7 @@ jobs:
   publish_release:
     name: Publish Release
     runs-on: "self-hosted"
-    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && contains(github.event_name, 'release')"
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && github.event_name == 'release'"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -48,9 +48,9 @@ jobs:
   test_release:
     name: Test Release
     runs-on: "self-hosted"
-    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && contains(github.event_name, 'push')"
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && github.event_name == 'push'"
     steps:
-      - name: Checkout
+      - name: Checkout ${{ github.event_name }}
         uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
