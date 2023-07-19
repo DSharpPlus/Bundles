@@ -4,6 +4,9 @@ on:
   release:
     types:
       - "published"
+  push:
+    paths:
+      - ".github/workflows/publish.yml"
 
 env:
   DOTNET_NOLOGO: 1
@@ -15,7 +18,7 @@ jobs:
   publish_release:
     name: Publish Release
     runs-on: "self-hosted"
-    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master')"
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && contains(github.event_name, 'release')"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,7 +36,7 @@ jobs:
         with:
           name: Bundles Release ${{ github.event.release.name }} NuGet Packages.zip
           path: build/*
-      - name: Upload NuGet Packages To Github Release
+      - name: Upload NuGet Packages To GitHub Release
         uses: "ncipollo/release-action@v1"
         with:
           allowUpdates: true
@@ -42,3 +45,23 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           omitNameDuringUpdate: true # We don't want to update the name of the release.
           omitBodyDuringUpdate: true # We don't want to update the body of the release.
+  test_release:
+    name: Test Release
+    runs-on: "self-hosted"
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]') && contains(github.event.release.target_commitish, 'master') && contains(github.event_name, 'push')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8
+      - name: Publish NuGet packages
+        run: |
+          mkdir build
+          dotnet pack -c Release -o build
+      - name: Upload NuGet packages to GitHub Actions
+        uses: actions/upload-artifact@v3
+        with:
+          name: Bundles Release ${{ github.event.release.name }} NuGet Packages.zip
+          path: build/*

@@ -3,6 +3,7 @@ name: Build Commit
 on:
   push:
     paths:
+      - ".github/workflows/build-commit.yml"
       - "src/**"
       - "Bundles.sln"
 
