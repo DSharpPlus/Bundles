@@ -160,7 +160,13 @@ public sealed class DictionarySlim<TKey, TValue> : IReadOnlyCollection<KeyValueP
         {
             this.Clear();
             this.disposed = true;
+            GC.SuppressFinalize(this);
         }
+    }
+
+    ~DictionarySlim()
+    {
+        this.Clear();
     }
 
     /// <summary>
