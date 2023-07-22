@@ -18,12 +18,14 @@ regenerate()
 
   # Convert to ICO
   # https://stackoverflow.com/a/15104985
-  convert "$1" -bordercolor white -border 0 \
+  convert -background transparent -colors 256 "$1" \
     \( -clone 0 -resize 16x16 \) \
     \( -clone 0 -resize 32x32 \) \
     \( -clone 0 -resize 48x48 \) \
     \( -clone 0 -resize 64x64 \) \
-    -delete 0 -alpha off -colors 256 "${1%.*}.ico"
+    \( -clone 0 -resize 128x128 \) \
+    \( -clone 0 -resize 256x256 \) \
+    -delete 0 "${1%.*}.ico"
 }
 
 # Iterate over each file matching the pattern "*.svg" in the "res" directory
