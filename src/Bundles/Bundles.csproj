@@ -1,25 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsAotCompatible>true</IsAotCompatible>
-  </PropertyGroup>
-  <PropertyGroup>
-    <Authors>Akiraveliara, dotnet/corefxlab SlimDictionary contributors</Authors>
-    <Company>DSharpPlus Contributors</Company>
-    <Description>A collection of collections and related types of varying usefulness.</Description>
-    <PackageIcon>logo.png</PackageIcon>
+    <OutputType>Library</OutputType>
     <PackageId>Bundles</PackageId>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/DSharpPlus/Bundles</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/DSharpPlus/Bundles</RepositoryUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="../../LICENSE" Pack="true" PackagePath=""/>
-    <EmbeddedResource Include="../../README.md" Pack="true" PackagePath=""/>
-    <EmbeddedResource Include="../../res/logo.png" Pack="true" PackagePath=""/>
-  </ItemGroup>
 </Project>
