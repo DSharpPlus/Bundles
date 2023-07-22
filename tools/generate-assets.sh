@@ -14,7 +14,7 @@ regenerate()
   svgo --multipass --quiet "$1"
 
   # Convert to PNG
-  convert "$1" -size 1024x1024 -background none "${1%.*}.png"
+  convert "$1" -size 1024x1024 -background transparent "${1%.*}.png"
 
   # Convert to ICO
   # https://stackoverflow.com/a/15104985
