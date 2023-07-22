@@ -7,6 +7,10 @@ on:
   push:
     paths:
       - ".github/workflows/publish.yml"
+      - "src/Bundles/Bundles.csproj"
+      - "tests/Bundles.Tests/Bundles.Tests.csproj"
+      - "Directory.Build.props"
+      - "Directory.Packages.props"
 
 env:
   DOTNET_NOLOGO: 1
