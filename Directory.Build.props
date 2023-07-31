@@ -19,7 +19,7 @@
   </PropertyGroup>
   <!-- nuget -->
   <PropertyGroup>
-    <Authors>Akiraveliara, dotnet/corefxlab SlimDictionary contributors</Authors>
+    <Authors>akiraveliara, dotnet/corefxlab DictionarySlim contributors</Authors>
     <Company>DSharpPlus Contributors</Company>
     <Description>A collection of collections and related types of varying usefulness.</Description>
     <PackageIcon>logo.png</PackageIcon>
@@ -33,6 +33,6 @@
   <ItemGroup>
     <EmbeddedResource Include="../../LICENSE" Pack="true" PackagePath=""/>
     <EmbeddedResource Include="../../README.md" Pack="true" PackagePath=""/>
-    <EmbeddedResource Include="../../res/logo.png" Pack="true" PackagePath=""/>
+    <EmbeddedResource Include="../../img/logo.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
