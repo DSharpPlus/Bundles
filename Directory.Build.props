@@ -1,39 +1,38 @@
 <Project>
-
   <!-- build -->
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>preview</LangVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <LangVersion>preview</LangVersion>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-
+    <Nullable>enable</Nullable>
+    <TargetFramework>net8.0</TargetFramework>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <!-- build and versioning setup -->
     <ManagePackageVersionsCentrally>True</ManagePackageVersionsCentrally>
-    <UseArtifactsOutput>true</UseArtifactsOutput>
     <NuGetAudit>true</NuGetAudit>
-
+    <UseArtifactsOutput>true</UseArtifactsOutput>
     <!-- sourcelink -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
-
   <!-- nuget -->
   <PropertyGroup>
-    <Authors>
-      akiraveliara, dotnet/corefxlab SlimDictionary contributors
-    </Authors>
-    <Description>A collection of collections and related types of varying usefulness.</Description>
+    <Authors>Akiraveliara, dotnet/corefxlab SlimDictionary contributors</Authors>
     <Company>DSharpPlus Contributors</Company>
+    <Description>A collection of collections and related types of varying usefulness.</Description>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/DSharpPlus/Bundles</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/DSharpPlus/Bundles</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageLicenseExpression>MPL</PackageLicenseExpression>
-    <PackageIcon>dsharpplus.png</PackageIcon>
-    <PackageIconUrl>https://raw.githubusercontent.com/DSharpPlus/DSharpPlus/master/logo/dsharpplus.png</PackageIconUrl>
   </PropertyGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="../../LICENSE" Pack="true" PackagePath=""/>
+    <EmbeddedResource Include="../../README.md" Pack="true" PackagePath=""/>
+    <EmbeddedResource Include="../../res/logo.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>

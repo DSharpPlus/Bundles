@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-	  <OutputType>Library</OutputType>
-	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	  <IsAotCompatible>true</IsAotCompatible>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsAotCompatible>true</IsAotCompatible>
+    <OutputType>Library</OutputType>
+    <PackageId>Bundles</PackageId>
   </PropertyGroup>
-
 </Project>
