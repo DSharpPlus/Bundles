@@ -29,7 +29,7 @@ regenerate()
 }
 
 # Iterate over each file matching the pattern "*.svg" in the "res" directory
-for file in res/*.svg; do
+for file in img/*.svg; do
     # Execute the "regenerate" command on each file
     regenerate "$file"
 done
@@ -37,11 +37,11 @@ done
 # Check if any files were modified
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 git config --global user.name "github-actions[bot]"
-git add res > /dev/null
+git add img > /dev/null
 git diff-index --quiet HEAD
 if [ "$?" == "1" ]; then
-  git commit -m "[ci-skip] Regenerate resource files." > /dev/null
+  git commit -m "[ci-skip] Regenerate image files." > /dev/null
   git push > /dev/null
 else
-  echo "No resource files were modified."
+  echo "No image files were modified."
 fi

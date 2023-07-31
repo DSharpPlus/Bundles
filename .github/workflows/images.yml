@@ -3,14 +3,14 @@ name: Regenerate Resource Files
 on:
   push:
     paths:
-      - ".github/workflows/resources.yml"
-      - "res/**"
+      - ".github/workflows/images.yml"
+      - "img/**"
       - "tools/generate-assets.sh"
   workflow_dispatch:
 
 jobs:
   regenerate-assets:
-    name: Regenerate Resource Files
+    name: Regenerate Image Files
     runs-on: self-hosted
     steps:
       - name: Checkout
