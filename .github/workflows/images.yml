@@ -1,4 +1,4 @@
-name: Regenerate Resource Files
+name: Regenerate Image Files
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
 jobs:
   regenerate-assets:
     name: Regenerate Image Files
+    permissions: write-all
     runs-on: self-hosted
     steps:
       - name: Checkout

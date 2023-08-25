@@ -28,7 +28,7 @@ regenerate()
     -delete 0 "${1%.*}.ico"
 }
 
-# Iterate over each file matching the pattern "*.svg" in the "res" directory
+# Iterate over each file matching the pattern "*.svg" in the "img" directory
 for file in img/*.svg; do
     # Execute the "regenerate" command on each file
     regenerate "$file"
