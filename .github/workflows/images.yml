@@ -5,7 +5,7 @@ on:
     paths:
       - ".github/workflows/images.yml"
       - "img/**"
-      - "tools/generate-assets.sh"
+      - "tools/generate-images.sh"
   workflow_dispatch:
 
 jobs:
@@ -17,4 +17,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Generate Assets
-        run: tools/generate-assets.sh
+        run: tools/generate-images.sh
