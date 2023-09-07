@@ -40,8 +40,6 @@ internal sealed class DictionarySlimDebugView<K, V>
 )
     where K : IEquatable<K>
 {
-#pragma warning disable CA1822
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     public KeyValuePair<K, V>[] Items => dictionary.ToArray();
-#pragma warning restore CA1822
 }

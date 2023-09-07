@@ -30,4 +30,16 @@ internal static class ThrowHelper
     [StackTraceHidden]
     internal static void ThrowValueNotFound()
         => throw new ArgumentException("There was no value corresponding to the given key.");
+
+    [DoesNotReturn]
+    [DebuggerHidden]
+    [StackTraceHidden]
+    internal static void ThrowNonResizingCollectionFull()
+        => throw new InvalidOperationException("This collection is full, and no items can be added.");
+
+    [DoesNotReturn]
+    [DebuggerHidden]
+    [StackTraceHidden]
+    internal static void ThrowCollectionEmpty()
+        => throw new InvalidOperationException("This collection is empty.");
 }
