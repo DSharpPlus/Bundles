@@ -125,7 +125,7 @@ public unsafe ref struct ValueStack<T>
             return false;
         }
 
-        item = this.items[count--];
+        item = this.items[--count];
         return true;
     }
 
@@ -145,7 +145,7 @@ public unsafe ref struct ValueStack<T>
             return false;
         }
 
-        item = this.items[count];
+        item = this.items[count - 1];
         return true;
     }
 
