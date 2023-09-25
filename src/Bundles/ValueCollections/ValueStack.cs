@@ -170,7 +170,7 @@ public unsafe ref struct ValueStack<T>
     /// <exception cref="InvalidOperationException">Thrown if the stack was empty.</exception>
     public T Pop()
     {
-        if (!this.TryPop(out T item))
+        if (this.TryPop(out T item))
         {
             return item;
         }
