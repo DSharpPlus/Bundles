@@ -105,7 +105,7 @@ public unsafe ref struct ValueStack<T>
             return false;
         }
 
-        this.items[++count] = item;
+        this.items[count++] = item;
         return true;
     }
 
