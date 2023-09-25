@@ -203,7 +203,7 @@ public unsafe ref struct ValueStack<T>
     {
         if (this.count != 0)
         {
-            return ref this.items[count];
+            return ref this.items[count - 1];
         }
 
         ThrowHelper.ThrowCollectionEmpty();
