@@ -100,7 +100,7 @@ public unsafe ref struct ValueStack<T>
         T item
     )
     {
-        if (this.count == this.items.Length - 1)
+        if (this.count == this.items.Length)
         {
             return false;
         }
