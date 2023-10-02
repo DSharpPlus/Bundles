@@ -1,19 +1,20 @@
-name: Regenerate Resource Files
+name: Regenerate Image Files
 
 on:
   push:
     paths:
       - ".github/workflows/images.yml"
       - "img/**"
-      - "tools/generate-assets.sh"
+      - "tools/generate-images.sh"
   workflow_dispatch:
 
 jobs:
   regenerate-assets:
     name: Regenerate Image Files
+    permissions: write-all
     runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Generate Assets
-        run: tools/generate-assets.sh
+        run: tools/generate-images.sh
