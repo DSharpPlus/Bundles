@@ -4,5 +4,6 @@
     <IsAotCompatible>true</IsAotCompatible>
     <OutputType>Library</OutputType>
     <PackageId>Bundles</PackageId>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 </Project>
