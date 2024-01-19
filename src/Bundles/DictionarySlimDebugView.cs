@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace Bundles;
 
@@ -41,5 +40,5 @@ internal sealed class DictionarySlimDebugView<K, V>
     where K : IEquatable<K>
 {
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-    public KeyValuePair<K, V>[] Items => dictionary.ToArray();
+    public KeyValuePair<K, V>[] Items => [.. dictionary];
 }

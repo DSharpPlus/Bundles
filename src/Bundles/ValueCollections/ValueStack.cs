@@ -26,7 +26,7 @@ public unsafe ref struct ValueStack<T>
     /// </summary>
     public ValueStack()
     {
-        this.items = Span<T>.Empty;
+        this.items = [];
         this.count = 0;
     }
 
