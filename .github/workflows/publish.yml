@@ -51,7 +51,7 @@ jobs:
           omitBodyDuringUpdate: true # We don't want to update the body of the release.
   test_release:
     name: Test Release
-    runs-on: "self-hosted"
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci-skip]') && github.ref_name == 'master' && github.event_name == 'push'"
     steps:
       - name: Checkout
