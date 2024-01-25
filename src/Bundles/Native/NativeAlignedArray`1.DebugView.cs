@@ -14,10 +14,8 @@ namespace Bundles.Native;
 
 unsafe partial struct NativeAlignedArray<T>
 {
-    internal sealed class NativeAlignedArrayDebugView
+    internal sealed class NativeAlignedArrayDebugView(NativeAlignedArray<T> array)
     {
-        private readonly NativeAlignedArray<T> array;
-
         public bool IsNull => array.pointer == null;
 
         public nuint Length => array.Length;
