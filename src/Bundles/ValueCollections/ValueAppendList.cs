@@ -2,18 +2,20 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+using System;
 using System.Buffers;
 
 namespace Bundles.ValueCollections;
 
 /// <summary>
-/// A value-type list type that can only be modified by appending, never by removing.
+/// A value-type list type that can only be modified by appending, never by removing. Use after disposal is undefined behaviour.
 /// </summary>
 /// <typeparam name="T">The element type controlled by this list.</typeparam>
-public partial record struct ValueAppendList<T>
+public partial record struct ValueAppendList<T> : IDisposable
 {
     private T[] buffer;
     private int index;
+    private bool disposed;
 
     /// <summary>
     /// Gets a readonly reference to the element at the specified index.
@@ -50,6 +52,16 @@ public partial record struct ValueAppendList<T>
     /// <returns></returns>
     public readonly Enumerator GetEnumerator()
         => new(this);
+
+    public void Dispose()
+    {
+        if (!this.disposed && typeof(T).IsPrimitive)
+        {
+            ArrayPool<T>.Shared.Return(this.buffer);
+        }
+
+        this.disposed = true;
+    }
 
     private void ResizeBuffer()
     {
