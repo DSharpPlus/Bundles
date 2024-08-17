@@ -1,22 +1,26 @@
 <Project>
+
   <!-- build -->
   <PropertyGroup>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <LangVersion>preview</LangVersion>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <Nullable>enable</Nullable>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+
     <!-- build and versioning setup -->
     <ManagePackageVersionsCentrally>True</ManagePackageVersionsCentrally>
     <NuGetAudit>true</NuGetAudit>
     <UseArtifactsOutput>true</UseArtifactsOutput>
+
     <!-- sourcelink -->
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
   <!-- nuget -->
   <PropertyGroup>
     <Authors>akiraveliara, dotnet/corefxlab DictionarySlim contributors</Authors>
@@ -30,9 +34,11 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/DSharpPlus/Bundles</RepositoryUrl>
   </PropertyGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="../../LICENSE" Pack="true" PackagePath=""/>
     <EmbeddedResource Include="../../README.md" Pack="true" PackagePath=""/>
     <EmbeddedResource Include="../../img/logo.png" Pack="true" PackagePath=""/>
   </ItemGroup>
+  
 </Project>

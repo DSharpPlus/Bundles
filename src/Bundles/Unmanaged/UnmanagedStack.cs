@@ -8,60 +8,50 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Bundles.ValueCollections;
+namespace Bundles.Unmanaged;
 
 /// <summary>
 /// Represents an allocation-free stack of unmanaged items. This stack cannot resize.
 /// </summary>
 /// <typeparam name="T">The item type of this collection.</typeparam>
 [DebuggerDisplay("Capacity = {Capacity}; Count = {Count}")]
-public unsafe ref struct ValueStack<T>
+public unsafe ref struct UnmanagedStack<T>
     where T : unmanaged
 {
     private readonly Span<T> items;
     private int count;
 
     /// <summary>
-    /// Creates a new, all-zero <see cref="ValueStack{T}"/>.
+    /// Creates a new, all-zero <see cref="UnmanagedStack{T}"/>.
     /// </summary>
-    public ValueStack()
+    public UnmanagedStack()
     {
         this.items = [];
         this.count = 0;
     }
 
     /// <summary>
-    /// Creates a new <see cref="ValueStack{T}"/>.
+    /// Creates a new <see cref="UnmanagedStack{T}"/>.
     /// </summary>
     /// <param name="memory">The backing memory for this instance.</param>
-    public ValueStack
-    (
-        Span<T> memory
-    )
+    public UnmanagedStack(Span<T> memory)
     {
         this.items = memory;
         this.count = 0;
     }
 
-    public ValueStack
-    (
-        T* memory,
-        nuint length
-    )
+    public UnmanagedStack(T* memory, nuint length)
     {
         this.items = MemoryMarshal.CreateSpan(ref Unsafe.AsRef<T>(memory), (int)length);
         this.count = 0;
     }
 
     /// <summary>
-    /// Creates a new <see cref="ValueStack{T}"/> by implicitly casting, enabling syntax such as
+    /// Creates a new <see cref="UnmanagedStack{T}"/> by implicitly casting, enabling syntax such as
     /// <c><![CDATA[ValueStack<int> stack = stackalloc int[4];]]></c>
     /// </summary>
     /// <param name="memory">The backing memory for this instance</param>
-    public static implicit operator ValueStack<T>
-    (
-        Span<T> memory
-    )
+    public static implicit operator UnmanagedStack<T>(Span<T> memory)
         => new(memory);
 
     /// <summary>
@@ -95,10 +85,7 @@ public unsafe ref struct ValueStack<T>
     /// </summary>
     /// <param name="item">The item to push to the stack.</param>
     /// <returns><c>true</c> to indicate success, <c>false</c> to indicate failure.</returns>
-    public bool TryPush
-    (
-        T item
-    )
+    public bool TryPush(T item)
     {
         if (this.count == this.items.Length)
         {
@@ -114,10 +101,7 @@ public unsafe ref struct ValueStack<T>
     /// </summary>
     /// <param name="item">The item popped from the stack.</param>
     /// <returns><c>true</c> to indicate success, <c>false</c> to indicate failure.</returns>
-    public bool TryPop
-    (
-        out T item
-    )
+    public bool TryPop(out T item)
     {
         if (this.count == 0)
         {
@@ -134,10 +118,7 @@ public unsafe ref struct ValueStack<T>
     /// </summary>
     /// <param name="item">The item peeked from the stack.</param>
     /// <returns><c>true</c> to indicate success, <c>false</c> to indicate failure.</returns>
-    public readonly bool TryPeek
-    (
-        out T item
-    )
+    public readonly bool TryPeek(out T item)
     {
         if (this.count == 0)
         {
@@ -153,10 +134,7 @@ public unsafe ref struct ValueStack<T>
     /// Pushes a new item to the stack.
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown if the stack was full.</exception>
-    public void Push
-    (
-        T item
-    )
+    public void Push(T item)
     {
         if (!this.TryPush(item))
         {
