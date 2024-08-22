@@ -32,6 +32,9 @@ public partial record struct ValueAppendList<T> : IDisposable
     /// </summary>
     public readonly int Count => this.index + 1;
 
+    public readonly ref readonly T GetNewestElement()
+        => ref this.buffer[this.index];
+
     /// <summary>
     /// Adds an element to the list, returning a readonly reference to the newly added element.
     /// </summary>
